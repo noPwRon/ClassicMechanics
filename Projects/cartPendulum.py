@@ -24,3 +24,8 @@ V_pend = m*g*y_pend
 V = V_cart+V_pend
 
 L=T-V
+LE = diff(L,theta) - diff(diff(L,thetadot),t)
+sols = smp.solve(LE,thetaddot).simplify()
+
+
+
