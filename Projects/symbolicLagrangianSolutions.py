@@ -1,41 +1,24 @@
 import sympy as smp
-
-#  Variables
-
-# x = L*np.cos(theta)
-# y = L*np.sin(theta)
-
-# trying to figure out how to get T which is 1/2mv^2
-# our v^2 wiil be broken down into x and y components
-
-# L = 1/2*m*v^2
+import vpython as vp
+import numpy as np
+import matplotlib.pyplot as plt
 
 
-m = smp.Symbol('m') # this one is easy and definintely needed
-L = smp.Symbol('L') # also another easy value because well... it's a value, but wwait this is where we want to use smp....
-x = smp.Symbol('x')
-y = smp.Symbol('y')
-g = smp.Symbol('g') #gravity yall
+# Defining variables
+t, A, g, R, omega, m = smp.symbols("t A g R \omega m")
+theta = smp.symbols(r"\theta", cls=smp.Function)
+theta = theta(t)
+thetadot = smp.diff(theta, t)
+thetaddot = smp.diff(thetadot, t)
 
-# but wait. we know more physics than that so lets gowith this much nicer choice
+x = R * smp.sin(theta)
+y = -R * smp.cos(theta)
+T = smp.Rational(1, 2) * m * (smp.diff(x, t) ** 2 + smp.diff(y, t) ** 2)
+V = m * g * y
 
-# L = T- V
-
-# T = L*\Dot(Theta)
-# V = 1/2 m g h
-# h = L*cos(theta)
-theta = smp.Symbol(r'\theta')
-
-
-
-T = 0.5*m*L*thetaDot**2
-
-V = L*g*H
-
-L = T- V
-
-# need to find Dl = P
-
-
-# s
+L = T-V
+L.simplify()
+LE = smp.diff(L,theta)-smp.diff(smp.diff(L,thetadot),t)
+sols = smp.solve(LE, thetaddot)
+sols[0].simplify()
 
