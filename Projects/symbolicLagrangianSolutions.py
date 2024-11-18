@@ -16,9 +16,8 @@ y = -R * smp.cos(theta)
 T = smp.Rational(1, 2) * m * (smp.diff(x, t) ** 2 + smp.diff(y, t) ** 2)
 V = m * g * y
 
-L = T-V
+L = T - V
 L.simplify()
-LE = smp.diff(L,theta)-smp.diff(smp.diff(L,thetadot),t)
+LE = smp.diff(L, theta) - smp.diff(smp.diff(L, thetadot), t)
 sols = smp.solve(LE, thetaddot)
 sols[0].simplify()
-
