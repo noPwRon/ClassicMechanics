@@ -2,6 +2,7 @@
 
 
 import sympy as smp
+import matplotlib.pyplot as plt
 
 m_1, m_2, R_1, R_2, g, t = smp.symbols("m_{1} m_{2} R_{1} R_{2} g t")
 
@@ -43,3 +44,5 @@ sol_theta2 = smp.diff(L, theta_2) - smp.diff(smp.diff(L, theta_2dot), t).simplif
 
 sol_theta_1ddot = smp.solve(sol_theta1, theta_1ddot)[0].simplify()
 sol_theta_2ddot = smp.solve(sol_theta2, theta_2ddot)[0].simplify()
+
+
