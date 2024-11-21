@@ -91,4 +91,12 @@ pivot = vp.sphere(pos=vp.vector(0,0,0),radius = R1/200)
 B1 = vp.sphere(pos=vp.vector(R1*sin(ans.T[0][0]),-R1*cos(vp.vector[0][0],0)),radius = R1/m1*10,color = "red")
 B2 = vp.sphere(pos = vp.vector(R1*sin(ans.T[0][0])+R2*sin(ans.T[2][0]),-R1*cos(ans.T[0][0])-R2.cos(ans.T[2][0]),0), radius = R2/m2*10,color="green")
 
+T = 0
 
+while T < len(ans.T[0]):
+    for i,j in (ans.T[0], ans.T[2]):
+        B1 = vp.sphere(pos=vp.vector(R1*sin(i),-R1*cos(i,0)),radius = R1/m1*10,color = "red")
+        B2 = vp.sphere(pos = vp.vector(R1*sin(i)+R2*sin(j),-R1*cos(i)-R2.cos(j),0), radius = R2/m2*10,color="green")
+        T = T + 1
+        
+        
