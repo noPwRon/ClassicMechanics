@@ -85,3 +85,10 @@ ans = odeint(dSdt, y0=[1,-3, 0, 1], t=t, args=(g,m1,m2,R1,R2))
 plt.plot(t,ans.T[2])
 
 # Once we have this information we can switch to using vpython for the fun stuff
+
+pivot = vp.sphere(pos=vp.vector(0,0,0),radius = R1/200)
+
+B1 = vp.sphere(pos=vp.vector(R1*sin(ans.T[0][0]),-R1*cos(vp.vector[0][0],0)),radius = R1/m1*10,color = "red")
+B2 = vp.sphere(pos = vp.vector(R1*sin(ans.T[0][0])+R2*sin(ans.T[2][0]),-R1*cos(ans.T[0][0])-R2.cos(ans.T[2][0]),0), radius = R2/m2*10,color="green")
+
+
