@@ -41,7 +41,7 @@ while t<10:
     balls[-1].F=vector(0,0,0)
     for ball in balls:
         ball.p = ball.p+ball.F*dt
-        ball.pos=ball.pos+ball.p*dt/ball.m
+        ball.p=ball.p+ball.p*dt/ball.m
     for i in range(1,N):
         springs[i-1].axis=balls[i]pos-balls[i-1].pos
         springs[i-1].pos=balls[i-1].pos
@@ -55,9 +55,3 @@ for i in range(1,N):
     Lnew=Lnew+dt.new
     
 print("New Length = ", Lnew," m")
-
-
-
-    
-    
-    
