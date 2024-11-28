@@ -43,8 +43,8 @@ while t<10:
         ball.p = ball.p+ball.F*dt
         ball.p=ball.p+ball.p*dt/ball.m
     for i in range(1,N):
-        springs[i-1].axis=balls[i]pos-balls[i-1].pos
-        springs[i-1].pos=balls[i-1].pos
+        springs[i-1].axis=balls[i].p-balls[i-1].p
+        springs[i-1].p=balls[i-1].p
         
     t=t+dt
     
