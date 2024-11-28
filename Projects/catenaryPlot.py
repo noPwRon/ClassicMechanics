@@ -12,7 +12,7 @@ N=20
 k = K*(N-1)
 balls = []
 leftend = vp.vector(0,0,0)
-ds = vector(1,0,0)*L/(N-1)
+ds = vp.vector(1,0,0)*L/(N-1)
 s = L/(N-1)
 R = L/(3*N)
 
@@ -34,7 +34,7 @@ while t<10:
     rate(1000)
     r1l=-springs[0].axis
     # balls[0].F=-k*(mag(r1l)-s)*norm(r1l)+vector(-0.01,.002,0)
-    balls[0].F=vector(0,0,0)
+    balls[0].F=vp.vector(0,0,0)
     for i in range(1,N-1):
         balls[i].F=balls[i].m*g-C*balls[i].p-k*(mag(springs[i-1].axis)-s)*norm(springs[i-1].axis)+k*(mag(springs[i].axis)-s)*norm(springs[i].axis)
         
