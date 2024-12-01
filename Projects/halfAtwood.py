@@ -22,8 +22,12 @@ y2 = y2(t)
 y2Dot = smp.diff(y2, t)
 y2DDot = smp.diff(y2Dot, t)
 
-t1 = smp.rational(1, 2) * m1 * x1Dot**2
-t2 = smp.rational(1, 2) * m2 * y1Dot**2
+t1 = smp.Rational(1, 2) * m1 * x1Dot**2
+t2 = smp.Rational(1, 2) * m2 * y1Dot**2
+T = t1 + t2
 
 v1 = m1 * g * y1
 v2 = m2 * g * y2
+V = v1 + v2
+
+L=T-V

@@ -4,6 +4,7 @@ import vpython as vp
 L = 0.2
 M = 0.1
 K = 1
+g = 9.81
 
 # defining the number of nodes
 N = 20
