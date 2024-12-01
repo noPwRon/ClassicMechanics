@@ -19,7 +19,7 @@ R = L / (3 * N)
 
 
 for i in range(N):
-    # Defining a set of balls that are a sphere which start at posisition leftend, of radius R and have a mass of M (total mass of the string) divided by the amount of units that make up the string
+    # Defining a set of balls that are a sphere which start at position leftend, of radius R and have a mass of M (total mass of the string) divided by the amount of units that make up the string
     balls = balls + [
         vp.sphere(
             pos=leftend + i * ds,

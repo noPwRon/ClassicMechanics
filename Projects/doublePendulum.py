@@ -55,7 +55,7 @@ dz2dt_f = smp.lambdify(
     (t, g, m_1, m_2, R_1, R_2, theta_1, theta_2, theta_1dot, theta_2dot),
     sols[theta_2ddot],
 )
-# Next two are just identif functions, but they are part of making python use 4 first order ODEs
+# Next two are just identify functions, but they are part of making python use 4 first order ODEs
 dtheta_1dt_f = smp.lambdify(theta_1dot, theta_1dot)
 dtheta_2dt_f = smp.lambdify(theta_2dot, theta_2dot)
 
@@ -96,7 +96,7 @@ B1 = vp.sphere(
 B2 = vp.sphere(
     pos=vp.vector(
         R1 * vp.sin(ans.T[0][0]) + R2 * vp.sin(ans.T[2][0]),
-        -R1 * vp.cos(ans.T[0][0]) - R2*vp.cos(ans.T[2][0]),
+        -R1 * vp.cos(ans.T[0][0]) - R2 * vp.cos(ans.T[2][0]),
         0,
     ),
     radius=R2 / m2 * 10,
@@ -113,7 +113,9 @@ while T < len(ans.T[0]):
             color="red",
         )
         B2 = vp.sphere(
-            pos=vp.vector(R1 * vp.sin(i) + R2 * vp.sin(j), -R1 * vp.cos(i) - R2 *vp.cos(j), 0),
+            pos=vp.vector(
+                R1 * vp.sin(i) + R2 * vp.sin(j), -R1 * vp.cos(i) - R2 * vp.cos(j), 0
+            ),
             radius=R2 / m2 * 10,
             color="green",
         )
