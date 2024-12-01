@@ -1,5 +1,5 @@
 # Lagrangian method for determining the equation of motion for a double pendulum
-
+import vpython as vp
 import sympy as smp
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
@@ -78,25 +78,43 @@ m2 = 3
 R1 = 3
 R2 = 4
 # y0 = initial conditions (theta, theta1dot theta2 theta2dot) t=t tells it to use the t generated above and args are args
-ans = odeint(dSdt, y0=[1,-3, 0, 1], t=t, args=(g,m1,m2,R1,R2))
+ans = odeint(dSdt, y0=[1, -3, 0, 1], t=t, args=(g, m1, m2, R1, R2))
 
-# transposing the array allows you to break up each block into one variable 
+# transposing the array allows you to break up each block into one variable
 
-plt.plot(t,ans.T[2])
+plt.plot(t, ans.T[2])
 
 # Once we have this information we can switch to using vpython for the fun stuff
 
-pivot = vp.sphere(pos=vp.vector(0,0,0),radius = R1/200)
+pivot = vp.sphere(pos=vp.vector(0, 0, 0), radius=R1 / 200)
 
-B1 = vp.sphere(pos=vp.vector(R1*sin(ans.T[0][0]),-R1*cos(vp.vector[0][0],0)),radius = R1/m1*10,color = "red")
-B2 = vp.sphere(pos = vp.vector(R1*sin(ans.T[0][0])+R2*sin(ans.T[2][0]),-R1*cos(ans.T[0][0])-R2.cos(ans.T[2][0]),0), radius = R2/m2*10,color="green")
+B1 = vp.sphere(
+    pos=vp.vector(R1 * vp.sin(ans.T[0][0]), -R1 * vp.cos(vp.vector[0][0], 0)),
+    radius=R1 / m1 * 10,
+    color="red",
+)
+B2 = vp.sphere(
+    pos=vp.vector(
+        R1 * vp.sin(ans.T[0][0]) + R2 * vp.sin(ans.T[2][0]),
+        -R1 * vp.cos(ans.T[0][0]) - R2*vp.cos(ans.T[2][0]),
+        0,
+    ),
+    radius=R2 / m2 * 10,
+    color="green",
+)
 
 T = 0
 
 while T < len(ans.T[0]):
-    for i,j in (ans.T[0], ans.T[2]):
-        B1 = vp.sphere(pos=vp.vector(R1*sin(i),-R1*cos(i,0)),radius = R1/m1*10,color = "red")
-        B2 = vp.sphere(pos = vp.vector(R1*sin(i)+R2*sin(j),-R1*cos(i)-R2.cos(j),0), radius = R2/m2*10,color="green")
+    for i, j in (ans.T[0], ans.T[2]):
+        B1 = vp.sphere(
+            pos=vp.vector(R1 * vp.sin(i), -R1 * vp.cos(i, 0)),
+            radius=R1 / m1 * 10,
+            color="red",
+        )
+        B2 = vp.sphere(
+            pos=vp.vector(R1 * vp.sin(i) + R2 * vp.sin(j), -R1 * vp.cos(i) - R2 *vp.cos(j), 0),
+            radius=R2 / m2 * 10,
+            color="green",
+        )
         T = T + 1
-        
-        
