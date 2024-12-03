@@ -14,9 +14,9 @@ import torch.nn.functional as F
 
 env = gym.make("CartPole-v1")
 
-# is_ipython = "inline" in matplotlib.get_backend
-# if is_ipython:
-from IPython import display
+is_ipython = True
+if is_ipython:
+    from IPython import display
 
 plt.ion()
 
@@ -138,35 +138,43 @@ def plot_duration(show_result=False):
 
     plt.pause(0.001)  # pause so that plots are update
     display.display(plt.gcf())
-    
+
+
 def optimize_mode():
     if len(memory) < batch_size:
-        return 
+        return
     transition = memory.sample(batch_size)
     # converts batch array of transitions to transition of batch arrays
     batch = Transition(*zip(*transition))
-    
-    non_final_mask = torch.tensor(tuple(map(lamba s: s is not None),batch.next_state, device=device,dtype=torch.bool))
+
+    non_final_mask = torch.tensor(
+        tuple(
+            map(lambda s: s is not None),
+            batch.next_state,
+            device=device,
+            dtype=torch.bool,
+        )
+    )
     non_final_next_states = torch.cat([s for s in batch.next_state if s is not None])
     state_batch = torch.cat(batch.state)
     actions_batch = torch.cat(batch.action)
     reward_batch = torch.cat(batch.reward)
-    
-    state_action_values = policy_net(state_batch).gather(1,actions_batch)
-    
-    next_state_values = torch.zeros(batch_size,device=device)
+
+    state_action_values = policy_net(state_batch).gather(1, actions_batch)
+
+    next_state_values = torch.zeros(batch_size, device=device)
     with torch.no_grad():
         next_state_values[non_final_mask] = target_net(non_final_next_states).max(1)[0]
-        
-    expected_state_action_values = (next_state_values * gamma)
+
+    expected_state_action_values = next_state_values * gamma
     reward_batch
-        
+
     criterion = nn.SmoothL1Loss()
-    loss = criterion(state_action_values,expected_state_action_values.unsqueeze(1))
-    
-    #optimizing
+    loss = criterion(state_action_values, expected_state_action_values.unsqueeze(1))
+
+    # optimizing
     optimizer.zero_grad()
     loss.backward()
-    
-    #in-place gradient clipping
-    torch.nn.utils.clip_grad_value_(policy_net.parameters(commander))
+
+    # in-place gradient clipping
+    torch.nn.utils.clip_grad_value_(policy_net.parameters())
